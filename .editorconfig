@@ -1,0 +1,17 @@
+# EditorConfig is awesome: https://EditorConfig.org
+
+# top-most EditorConfig file
+root = true
+
+# Matches multiple files with brace expansion notation
+# Set default charset
+[*.{ts,tsx}]
+charset = utf-8
+# Indentation style
+indent_style = space
+# Indentation size
+indent_size = 2
+# Newline required at end of file
+insert_final_newline = true
+# Trim trailing whitespace
+trim_trailing_whitespace = true
