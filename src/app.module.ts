@@ -1,12 +1,20 @@
 import { Module } from '@nestjs/common';
 import { TasksModule } from './tasks/tasks.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRoot(
-      'mongodb+srv://carlos8788:ePiz7gwfi4r9a3Ke@cluster0.wrgsfdb.mongodb.net/react-nest-mongo?retryWrites=true&w=majority',
-    ),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get<string>('DB_URI'),
+      }),
+    }),
     TasksModule,
   ],
 })
